@@ -39,7 +39,7 @@ In your controller you may use next ways to init optimizer.
 $scope.optimizeSettings = {
    trigger: {
       selector: '[href="#modal-create"]', //This element(s) will be a trigger(s) for optimizer
-      event: 'click',                     //Rvent for applying optimization
+      event: 'click',                     //Event for applying optimization
       dynamicTrigger: {                   //If you have dynamic elements which will be a triggers as well,
                                           // you may put them to dynamicTrigger object
          selector: '.lean-overlay',
@@ -65,7 +65,7 @@ $scope.optimizeSettings = {
 ```
 but it's not tested yet :). Such recursive constructions may be useful in nested dropdowns
 
-**Example 2.**
+**Example 2.** http://embed.plnkr.co/WS17mcxp9hzOvpJwbvjW
 ```javascript
 $scope.optimizeSettings = {
    trigger: [{                            //You can add multi triggers (array of triggers)
@@ -74,8 +74,12 @@ $scope.optimizeSettings = {
       delay: 0,
       preventInterval: false,             //You don't know how user can make your optimized element not visible
       interval: 500                       // and thats why want to check - is element still visible every 500ms
+   },
+   {
+     selector: '.modal-close',
+     event: 'click'
    }],
-   delay: 300                             //This delay belongs to all triggers: if you didn't set own delay for some trigger,
+   delay: 500                             //This delay belongs to all triggers: if you didn't set own delay for some trigger,
 };                                        // this value (300ms) will be inherited
 ```
 
