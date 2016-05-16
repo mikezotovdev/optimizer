@@ -33,7 +33,7 @@ defaultSettings = {
 ###Usage
 In your controller you may use next ways to init optimizer.
 
-**Example 1.**
+**Example 1.** http://plnkr.co/edit/WS17mcxp9hzOvpJwbvjW?p=info
 ```javascript
 
 $scope.optimizeSettings = {
@@ -50,7 +50,9 @@ $scope.optimizeSettings = {
    }
 };
 ```
-`dynamicTrigger` may be object or array of objects. `dynamicTrigger` used when you have elements which haven't compiled yet but will be available after optimizer compile `optimize-content`. E.g., you have a modal window with close button and background shadowed div which will be compiled only after modal window inited and opened, in this case you have to use dynamicTrigger. Settings for `dynamicTrigger` is the same as for main settings for optimizer, so you may use `preventInterval` and other parameters. Most likely, you may create recursive constructions as:
+In Example 1 we have one `trigger` - it's may be single object or array of objects - `trigger`s. You really can push any element selectors to this array, but I recommended to use "good" selectors which returns few elements. In optimizer we'll add event listener to trigger elements, thats way it would be better to have few trigger elements.
+
+`dynamicTrigger` may be object or array of objects as well. `dynamicTrigger` used when you have elements which haven't compiled yet but will be available after optimizer compile `optimize-content`. E.g., you have a modal window with close button and background shadowed div which will be compiled only after modal window inited and opened, in this case you have to use dynamicTrigger. Settings for `dynamicTrigger` is the same as for main settings for optimizer, so you may use `preventInterval` and other parameters. Most likely, you may create recursive constructions as:
 
 ```javascript
 $scope.optimizeSettings = {
@@ -65,36 +67,27 @@ $scope.optimizeSettings = {
 ```
 but it's not tested yet :). Such recursive constructions may be useful in nested dropdowns
 
-**Example 2.** http://embed.plnkr.co/WS17mcxp9hzOvpJwbvjW
+
+**Example 2.** http://plnkr.co/edit/Fdd5jit1YXRUkKVlBHJV?p=info
 ```javascript
 $scope.optimizeSettings = {
-   trigger: [{                            //You can add multi triggers (array of triggers)
+   trigger: {                            //You can add multi triggers (array of triggers) if you want
       selector: '[href="#modal-create"]',
       event: 'click',
-      delay: 0,
       preventInterval: false,             //You don't know how user can make your optimized element not visible
-      interval: 500                       // and thats why want to check - is element still visible every 500ms
+      interval: 500                       // and that's why want to check - is element still visible every 500ms
    },
-   {
-     selector: '.modal-close',
-     event: 'click'
-   }],
-   delay: 500                             //This delay belongs to all triggers: if you didn't set own delay for some trigger,
+   delay: 300                             //This delay belongs to all triggers: if you didn't set own delay for some trigger,
 };                                        // this value (300ms) will be inherited
 ```
 
-In Example 2 we have array of triggers. You really can push any element selectors to this array, but I recommended to use "good" selectors which returns few elements. In optimizer we'll add event listener to trigger elements, thats way it would be better to have few trigger elements.
 
-
-**Example 3.**
+**Example 3.** http://plnkr.co/edit/lp3KWdRT0gQrtq9lyek8?p=info
 ```javascript
 $scope.optimizeSettings = {
    trigger: {
       selector: '[href="#modal-create"]',
       event: 'click',
-      delay: 100,             //This settings will be inherited from dynamicTrigger
-      preventInterval: false, //And this
-      interval: 500,          //And this
       dynamicTrigger: [
          {
             selector: '.lean-overlay',
@@ -110,18 +103,18 @@ $scope.optimizeSettings = {
 };
 ```
 
-**Example 4.**
+**Example 4.** http://plnkr.co/edit/VEz85oxzkzi5K6tykDMS?p=info
 ```javascript
 $scope.optimizeSettings = {
-   trigger: [                                 //Again we have array of triggers
+   trigger: [                                 //We have array of triggers
       {
-         selector: '[href="#modal-create"]',
+         selector: '#modal-create-trigger',
          event: 'click',
+         delay: 30,                           //This delay will be inherited by dynamicTrigger
          dynamicTrigger: [
             {
                selector: '.lean-overlay',
-               event: 'click',
-               delay: 500
+               event: 'click'
             },
             {
                selector: '.modal-close',
@@ -130,13 +123,21 @@ $scope.optimizeSettings = {
          ]
       },
       {
-         selector: '.modal-create-open',
-         event: 'click'
+         selector: '#modal-create-trigger-alt',
+         event: 'click',                    //delay is not set yet, that's why it will be inherited from parent (= 300ms)
+         dynamicTrigger: [
+            {                               //delay will be inherited from parent (= 300ms as well)
+               selector: '.lean-overlay',
+               event: 'click'
+            },
+            {
+               selector: '.modal-close',
+               event: 'click'
+            },
+         ]
       }
    ],
-   delay: 100,              //This settings will be inherited from trigger and dynamicTrigger
-   preventInterval: false,  //And this
-   interval: 500,           //And this
+   delay: 300              //This settings will be inherited from trigger and dynamicTrigger
 };
 ```
 
