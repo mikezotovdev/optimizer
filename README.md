@@ -33,7 +33,8 @@ defaultSettings = {
 ###Usage
 In your controller you may use next ways to init optimizer.
 
-**Example 1.** http://plnkr.co/edit/WS17mcxp9hzOvpJwbvjW?p=info
+<a href="http://plnkr.co/edit/WS17mcxp9hzOvpJwbvjW?p=info" target="_blank">**Example 1.** </a>
+
 ```javascript
 
 $scope.optimizeSettings = {
@@ -68,7 +69,7 @@ $scope.optimizeSettings = {
 but it's not tested yet :). Such recursive constructions may be useful in nested dropdowns
 
 
-**Example 2.** http://plnkr.co/edit/Fdd5jit1YXRUkKVlBHJV?p=info
+<a href="http://plnkr.co/edit/Fdd5jit1YXRUkKVlBHJV?p=info" target="_blank">**Example 2.**</a>
 ```javascript
 $scope.optimizeSettings = {
    trigger: {                            //You can add multi triggers (array of triggers) if you want
@@ -82,7 +83,7 @@ $scope.optimizeSettings = {
 ```
 
 
-**Example 3.** http://plnkr.co/edit/lp3KWdRT0gQrtq9lyek8?p=info
+<a href="http://plnkr.co/edit/lp3KWdRT0gQrtq9lyek8?p=info" target="_blank">**Example 3.**</a>
 ```javascript
 $scope.optimizeSettings = {
    trigger: {
@@ -103,7 +104,7 @@ $scope.optimizeSettings = {
 };
 ```
 
-**Example 4.** http://plnkr.co/edit/VEz85oxzkzi5K6tykDMS?p=info
+<a href="http://plnkr.co/edit/VEz85oxzkzi5K6tykDMS?p=info" target="_blank">**Example 4.**</a>
 ```javascript
 $scope.optimizeSettings = {
    trigger: [                                 //We have array of triggers
