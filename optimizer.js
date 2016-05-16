@@ -83,9 +83,9 @@
 
                var bindTrigger = function (trigger) {
                   trigger = angular.extend({
-                     delay: 50,
+                     delay: settings.delay,
                      preventInterval: settings.preventInterval,
-                     interval: 1000
+                     interval: settings.interval
                   }, trigger);
 
                   var triggerElements = angular.element(trigger.selector);
