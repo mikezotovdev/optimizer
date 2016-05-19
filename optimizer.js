@@ -189,6 +189,8 @@
             var rebuildView = function (value) {
 
                if (value !== scope.optimizeContent) {
+                  scope.optimizeContent = value;
+
                   if (value === 'compiled') {
                      if (!childScope) {
                         transclude(function (clone, newScope) {
@@ -221,12 +223,7 @@
                }
             };
 
-            var updateContent = function (value) {
-               scope.optimizeContent = value;
-               rebuildView(value);
-            };
-
-            optimize.propagateEvent.on(updateContent);
+            optimize.propagateEvent.on(rebuildView);
 
             scope.$on('$destroy', function () {
                optimize.destroy();
