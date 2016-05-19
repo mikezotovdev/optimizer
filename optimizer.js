@@ -186,36 +186,37 @@
             var optimize = ctrl;
             var block, childScope, previousElements;
 
-            //TODO: in materializecss modal-close classes close modal on click, but after recompiling it's not working
             var rebuildView = function (value) {
 
-               if (value === 'compiled') {
-                  if (!childScope) {
-                     transclude(function (clone, newScope) {
-                        childScope = newScope;
-                        clone[clone.length++] = $compile.$$createComment('end optimizeContent', scope.optimizeContent);
+               if (value !== scope.optimizeContent) {
+                  if (value === 'compiled') {
+                     if (!childScope) {
+                        transclude(function (clone, newScope) {
+                           childScope = newScope;
+                           clone[clone.length++] = $compile.$$createComment('end optimizeContent', scope.optimizeContent);
 
-                        block = {
-                           clone: clone
-                        };
-                        $animate.enter(clone, element.parent(), element);
-                     });
-                  }
-               } else {
-                  if (previousElements) {
-                     previousElements.remove();
-                     previousElements = null;
-                  }
-                  if (childScope) {
-                     childScope.$destroy();
-                     childScope = null;
-                  }
-                  if (block) {
-                     previousElements = getBlockNodes(block.clone);
-                     $animate.leave(previousElements).then(function () {
+                           block = {
+                              clone: clone
+                           };
+                           $animate.enter(clone, element.parent(), element);
+                        });
+                     }
+                  } else {
+                     if (previousElements) {
+                        previousElements.remove();
                         previousElements = null;
-                     });
-                     block = null;
+                     }
+                     if (childScope) {
+                        childScope.$destroy();
+                        childScope = null;
+                     }
+                     if (block) {
+                        previousElements = getBlockNodes(block.clone);
+                        $animate.leave(previousElements).then(function () {
+                           previousElements = null;
+                        });
+                        block = null;
+                     }
                   }
                }
             };
