@@ -6,7 +6,7 @@ Code licensed under MIT license.
 
 ##Examples
 
-http://mikhailzotov.github.io/optimizer/
+http://mikezotovdev.github.io/optimizer/
 
 ## Get Started
 
